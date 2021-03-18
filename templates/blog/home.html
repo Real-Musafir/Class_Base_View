@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    {% for post in posts %}
+    <div class="blog-item">
+        <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+        <div class="info">
+            By <span><a href="#">{{ post.author }}</a></span> | In <span><a href="{% url 'post_by_category' post.category.pk %}">{{ post.category }}</a></span> | On <span>{{ post.pub_date }}</span> | &#x1f441 <span>{{ post.view_count }}</span> 
+        </div>
+        <p>{{ post.content|truncatewords:30 }}</p>
+    </div>
+    {% endfor %}
+
+    {% include 'blog/pagination_links.html' %}
+
+{% endblock %}
